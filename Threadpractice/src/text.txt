@@ -1,0 +1,5 @@
+Read info
+Print out onto screen
+Use buffered reader and file reader
+
+After, make 2 text files and read them using 2 threads, and join everything together
