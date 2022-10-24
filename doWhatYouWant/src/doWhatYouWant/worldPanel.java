@@ -31,14 +31,6 @@ public class worldPanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-			
-		
-		JFrame frame= new JFrame();	
-		frame.getContentPane().add(new worldPanel());
-		frame.setSize(300, 300);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);		
 		
 		
 		
@@ -195,4 +187,14 @@ public class worldPanel extends JPanel implements ActionListener, KeyListener {
 	c = 5;
 	
 	}
+
+	public static void main(String[] args) {
+		JFrame frame= new JFrame();	
+		frame.getContentPane().add(new worldPanel());
+		frame.setSize(1000, 1000);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(true);		
+	}
+	
 }
