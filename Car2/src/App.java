@@ -12,6 +12,7 @@ public class App {
 		NissanRogue NissanCar = new NissanRogue(true, false, "silver");
 		NissanCar.GetTopSpeed();
 
+		
 		input = new Scanner(System.in);
 		System.out.println("Which car would you like to purchase? (Honda or Nissan)");
 
