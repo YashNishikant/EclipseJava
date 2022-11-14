@@ -6,7 +6,7 @@ import java.io.IOException;
 public class Matrix {
 
    public Matrix(){
-       File file=new File("C:\\Users\\yash0\\eclipse-workspace\\Tasks\\src\\MatrixFile.txt");
+       File file=new File("C:\\github\\JavaApps\\Tasks\\src\\MatrixFile.txt");
 
        int[][] m1 = new int[0][0];
        int[][] m2 = new int[0][0];
@@ -50,15 +50,19 @@ public class Matrix {
        System.out.println("---------------------------------------------");
 
 
-       //printmatrix(sum(m1, m2));
-       //System.out.println();
-       //printmatrix(difference(m1, m2));
-       //System.out.println();
+       printmatrix(sum(m1, m2));
+       System.out.println();
+       printmatrix(difference(m1, m2));
+       System.out.println();
        product(m1, m2);
    }
 
    public int[][] sum(int[][] a, int[][] b){
 
+	   if((a.length != b.length) || (a[0].length != b[0].length)) {
+		   return null;
+	   }
+	   
        int[][] result = new int[a.length][a[0].length];
 
        for(int i = 0; i < a.length; i++){
@@ -72,6 +76,10 @@ public class Matrix {
 
    public int[][] difference(int[][] a, int[][] b){
 
+	   if((a.length != b.length) || (a[0].length != b[0].length)) {
+		   return null;
+	   }
+	   
        int[][] result = new int[a.length][a[0].length];
 
        for(int i = 0; i < a.length; i++){
@@ -149,12 +157,19 @@ public class Matrix {
 	}
    
    public void printmatrix(int[][] m){
+	   
+	   if(m != null) {
+	   
        for(int i = 0; i < m.length; i++){
            for(int j = 0; j < m[0].length; j++){
                System.out.print(m[i][j] + " ");
            }
            System.out.println();
        }
+	   }
+	   else {
+		   System.out.println("Cannot Perform Matrix Calculation");
+	   }
    }
 
    public static void main(String[] args) {
