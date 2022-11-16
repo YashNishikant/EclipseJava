@@ -6,7 +6,7 @@ import java.io.IOException;
 public class Matrix {
 
    public Matrix(){
-       File file=new File("C:\\github\\JavaApps\\Tasks\\src\\MatrixFile.txt");
+       File file=new File("MatrixFile.txt");
 
        int[][] m1 = new int[0][0];
        int[][] m2 = new int[0][0];
