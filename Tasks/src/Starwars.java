@@ -1,32 +1,23 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Stack;
 
-public class Starwars {
-
-	public Starwars() {
-		
-		Stack<Character> males = new Stack<Character>();
-		Stack<Character> females = new Stack<Character>();
-		Stack<Character> droidss = new Stack<Character>();
-		Stack<Character> validbirthyears = new Stack<Character>();
-		
-	}
-	
-	public static void main(String[] args) {
-		
-	}
-
-}
-
-class Character {
+class StarWarsCharacter {
 
 	private String name;
 	private String gender;
 	private String homeworld;
 	private String species;
-	private int birthyear;
+	private String birthyear;
 	
-	public Character(){
-		
+	public StarWarsCharacter(String n, String g, String h, String s, String b){
+		name = n;
+		gender = g;
+		homeworld = h;
+		species = s;
+		birthyear = b;
 	}
 	
 	public String getName() {
@@ -46,6 +37,9 @@ class Character {
 	}
 
 	public String getHomeworld() {
+		if(homeworld.equals("NA")) {
+			homeworld = "Unknown";
+		}
 		return homeworld;
 	}
 
@@ -61,12 +55,81 @@ class Character {
 		this.species = species;
 	}
 
-	public int getBirthyear() {
+	public String getBirthyear() {
 		return birthyear;
 	}
 
-	public void setBirthyear(int birthyear) {
+	public void setBirthyear(String birthyear) {
 		this.birthyear = birthyear;
 	}
 	
+	public String toString(boolean B) { 
+		if(B)
+			return String.format("%-40s %-40s %-40s", getName(), getHomeworld(), getBirthyear());
+		else 
+			return String.format("%-40s %-40s", getName(), getHomeworld());
+	}
+	
+}
+
+public class Starwars {
+
+	public Starwars() {
+		
+		Stack<StarWarsCharacter> males = new Stack<StarWarsCharacter>();
+		Stack<StarWarsCharacter> females = new Stack<StarWarsCharacter>();
+		Stack<StarWarsCharacter> droids = new Stack<StarWarsCharacter>();
+		Stack<StarWarsCharacter> validbirthyears = new Stack<StarWarsCharacter>();
+	
+		File f = new File("C:\\github\\JavaApps\\Tasks\\src\\StarWarsCharacters.csv");
+
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(f));
+			String temp;
+			while ((temp = reader.readLine()) != null) {
+				String[] pieces = temp.split(",");
+				
+				StarWarsCharacter c = new StarWarsCharacter(pieces[0], pieces[6], pieces[7], pieces[8], pieces[5]);
+				
+				if(c.getGender().equals("male")) {
+					males.push(c);
+				}
+				if(c.getGender().equals("female")) {
+					females.push(c);
+				}
+				if(c.getSpecies().equals("Droid")) {
+					droids.push(c);
+				}
+				if(c.getBirthyear().contains("BBY")) {
+					validbirthyears.push(c);
+				}
+			}
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+		
+		format("Male Characters", males, false);
+		format("Female Characters", females, false);
+		format("Droids", droids, false);
+		format("Ages", validbirthyears, true);
+		
+	}
+	
+	void format(String title, Stack<StarWarsCharacter> a, boolean birthyears) {
+		System.out.println(title);
+		if(birthyears)
+			System.out.println(String.format("%-40s %-40s %-40s", "Name", "Homeworld", "Birth Year (BBY)"));
+		else
+			System.out.println(String.format("%-40s %-40s", "Name", "Homeworld"));
+			
+		for(int i = a.size()-1; i > 0; i--) {
+			System.out.println(a.pop().toString(birthyears));
+		}
+		System.out.println("============================================================================================================");
+	}
+	
+	public static void main(String[] args) {
+		new Starwars();
+	}
+
 }

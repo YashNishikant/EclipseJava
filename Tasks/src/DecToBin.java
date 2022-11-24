@@ -1,8 +1,8 @@
 import java.util.Stack;
 
-public class Stacks {
+public class DecToBin {
 
-	public Stacks() {
+	public DecToBin() {
 		
 		int dec = 17;
 		int i = 0;
@@ -21,7 +21,7 @@ public class Stacks {
 	}
 	
 	public static void main(String[] args) {
-		new Stacks();
+		new DecToBin();
 	}
 	
 }
