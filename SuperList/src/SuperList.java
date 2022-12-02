@@ -28,29 +28,58 @@ public class SuperList<E> {
 	}
 
 	public void poll() {
+		size--;
 		root = root.getNext();
 	}
 
-	public E pop() {
-		ListNode<E> indexNode = root;
-		E value = null;
-
-		for (int i = 0; i < size; i++) {
-			value = indexNode.getValue();
-			indexNode = indexNode.getNext();
-		}
-		return value;
+	public void pop() {
+		size--;
+		end.setPrev(end.getPrev().getPrev());
 	}
 
 	public E get(int index) {
 		ListNode<E> indexNode = root;
 		E value = null;
 
-		for (int i = 0; i < index + 1; i++) {
+		if(index > size-1) {
+			System.out.println("Out of Bounds");
+			return null;
+		}
+		
+		for (int i = 0; i < index+1; i++) {
 			value = indexNode.getValue();
 			indexNode = indexNode.getNext();
 		}
 		return value;
+	}
+	
+	public boolean contains(E value) {
+		ListNode<E> indexNode = root;
+		
+		for (int i = 0; i < size; i++) {
+
+			if(indexNode.getValue() == value)
+				return true; 
+			
+			indexNode = indexNode.getNext();
+		}
+	
+		return false;
+		
+	}
+	
+	public void set(int index, E value) {
+		ListNode<E> indexNode = root;
+
+		if(index > size-1) {
+			System.out.println("Out of Bounds");
+			return;
+		}
+		
+		for (int i = 0; i < index; i++) {
+			indexNode = indexNode.getNext();
+		}
+		indexNode.setValue(value);
 	}
 
 	public void remove(int index) {
@@ -193,6 +222,10 @@ public class SuperList<E> {
 			return value;
 		}
 
+		public void setValue(E value) {
+			this.value = value;
+		}
+		
 		public ListNode<E> getNext() {
 			return next;
 		}

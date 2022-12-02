@@ -12,10 +12,7 @@ public class mainclass
 		list.push(6);
 		list.push(7);
 		list.add(2,99);
-		System.out.println(list.toString());
-		
-		list.poll();
-		System.out.println(list.toString());
+		System.out.println(list.contains(67));
 		
 		//list should have stored values as: {10, 2, 5, 12}
 
