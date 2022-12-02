@@ -1,3 +1,5 @@
+
+
 public class mainclass
 {
 	public mainclass()
@@ -6,8 +8,13 @@ public class mainclass
 
 		//This runner will test push(value), add(value), pop(), and poll()
 
-		list.push(10);
 		list.push(5);
+		list.push(6);
+		list.push(7);
+		list.add(2,99);
+		System.out.println(list.toString());
+		
+		list.poll();
 		System.out.println(list.toString());
 		
 		//list should have stored values as: {10, 2, 5, 12}
