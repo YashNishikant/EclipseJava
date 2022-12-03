@@ -1,3 +1,4 @@
+import java.util.EmptyStackException;
 
 public class SuperList<E> {
 
@@ -27,14 +28,26 @@ public class SuperList<E> {
 		size++;
 	}
 
-	public void poll() {
+	public E poll() {
+		
+		if(isEmpty())
+			return null;
+		
 		size--;
+		E val = root.getValue();
 		root = root.getNext();
+		return val;
 	}
 
-	public void pop() {
+	public E pop() {
+		
+		if(isEmpty())
+			throw new EmptyStackException();
+		
 		size--;
-		end.setPrev(end.getPrev().getPrev());
+		E val = end.getValue();
+		end = end.getPrev();
+		return val;
 	}
 
 	public E get(int index) {
@@ -42,8 +55,7 @@ public class SuperList<E> {
 		E value = null;
 
 		if(index > size-1) {
-			System.out.println("Out of Bounds");
-			return null;
+			throw new ArrayIndexOutOfBoundsException();
 		}
 		
 		for (int i = 0; i < index+1; i++) {
@@ -72,8 +84,7 @@ public class SuperList<E> {
 		ListNode<E> indexNode = root;
 
 		if(index > size-1) {
-			System.out.println("Out of Bounds");
-			return;
+			throw new ArrayIndexOutOfBoundsException();
 		}
 		
 		for (int i = 0; i < index; i++) {
@@ -82,11 +93,11 @@ public class SuperList<E> {
 		indexNode.setValue(value);
 	}
 
-	public void remove(int index) {
-
+	public E remove(int index) {
+		ListNode<E> indexNode = root;
+		E val = null;
 		if (size <= index) {
-			System.out.println("Out Of Bounds");
-			return;
+			throw new ArrayIndexOutOfBoundsException();
 		}
 		
 		size--;
@@ -94,19 +105,26 @@ public class SuperList<E> {
 		if (size == 1 && index == 0) {
 			clear();
 		} else if (index == 0) {
+			val = root.getValue();
 			root = root.getNext();
 		} else if (index == size) {
-			end.setPrev(end.getPrev().getPrev());
+			val = end.getValue();
+			end = end.getPrev();
 		} else {
-			ListNode<E> indexNode = root;
+			
 			for (int i = 0; i < index; i++) {
 				indexNode = indexNode.getNext();
 			}
 
+			val = indexNode.getValue();
+			
 			indexNode.getPrev().setNext(indexNode.getNext());
 			indexNode.getNext().setPrev(indexNode.getPrev());
 			
 		}
+	
+		return val;
+		
 	}
 
 	public void add(int index, E value) {
@@ -119,8 +137,7 @@ public class SuperList<E> {
 			root = temp;
 			end = root;
 		} else if (size < index) {
-			System.out.println("Out Of Bounds");
-			return;
+			throw new ArrayIndexOutOfBoundsException();
 		} else if (index == 0) {
 			if (size > 0) {
 				root.setPrev(temp);
