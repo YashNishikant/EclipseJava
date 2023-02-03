@@ -54,6 +54,7 @@ public class juliasetprogram extends JPanel implements AdjustmentListener, Actio
 
         scrollPanel = new JPanel();
         labelPanel = new JPanel();
+        labelPanel.setPreferredSize(new Dimension(100,50));
         scrollPanel.setLayout(new GridLayout(scrollbarlist.size(),1));
         labelPanel.setLayout(new GridLayout(scrollbarlist.size(),1));
 
@@ -251,7 +252,7 @@ public class juliasetprogram extends JPanel implements AdjustmentListener, Actio
                 double zx = 1.5f*((j-w/2)/(0.5*zoom*w)) + panX;
                 double zy = (i-h/2)/(0.5*zoom*h) + panY;
 
-                while((0.5*(zx*zx + zy*zy) < 6) && (iter > 0)){
+                while(((zx*zx + zy*zy) < 6) && (iter > 0)){
                     double d = (zx*zx - zy*zy) + aValue;
                     zy = 2 * 1/radValue * 5 * zx*zy + bValue;
                     zx = 1/radValue * 5 * d;
